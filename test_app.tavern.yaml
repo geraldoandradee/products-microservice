@@ -1,0 +1,15 @@
+test_name: Test CRUD Product
+
+stages:
+  - name: Read One Product
+    request:
+      url: http://localhost:5000/v1/product/1
+      method: GET
+      headers:
+        content-type: application/json
+    response:
+      status_code: 200
+      # json:
+      #   id: 1
+      #   title: "One product title here tetetetet"
+      #   price: 5.15

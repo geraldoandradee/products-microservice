@@ -1,0 +1,5 @@
+flask
+flask-restful
+flask-jwt
+ga-storage-manager==1.0.*
+validators==0.12.*

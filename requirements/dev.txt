@@ -1,0 +1,5 @@
+-r common.txt
+unittest2==1.1.0
+six==1.11.0
+tavern==0.18.*
+pytest==3.7.3
