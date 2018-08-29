@@ -14,7 +14,12 @@ class ProductValidator(object):
             raise InvalidFieldException("Product has not %s field" % field)
         return True
 
-    def validate(self):
+    def validate(self, is_a_patch=False):
+        if not is_a_patch:
+            for field in self.possible_fields:
+                if field not in self.data.keys():
+                    raise InvalidFieldException("You must provide a '%s' field" % field)
+
         for key, value in self.data.items():
             if self.is_valid_fields(key):
                 getattr(self, ''.join(['_validate_', key]))(key, value)

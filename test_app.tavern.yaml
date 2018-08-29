@@ -1,15 +1,134 @@
 test_name: Test CRUD Product
 
 stages:
-  - name: Read One Product
+  - name: Create One Product Incorrecly (Missing id)
     request:
-      url: http://localhost:5000/v1/product/1
+      url: http://localhost:5000/v1/products
+      method: POST
+      json:
+        title: "One product title here YO"
+        price: 1.22
+      headers:
+        content-type: application/json
+    response:
+      status_code: 422
+      body:
+        message: "Cannot create a new Product"
+        reason: "You must provide a 'id' field"
+
+  - name: Create One Product Incorrecly (Missing title)
+    request:
+      url: http://localhost:5000/v1/products
+      method: POST
+      json:
+        id: 9097
+        price: 1.22
+      headers:
+        content-type: application/json
+    response:
+      status_code: 422
+      body:
+        message: "Cannot create a new Product"
+        reason: "You must provide a 'title' field"
+
+  - name: Create One Product Incorrecly (Missing price)
+    request:
+      url: http://localhost:5000/v1/products
+      method: POST
+      json:
+        id: 9097
+        title: "One product title here YO"
+      headers:
+        content-type: application/json
+    response:
+      status_code: 422
+      body:
+        message: "Cannot create a new Product"
+        reason: "You must provide a 'price' field"
+
+  - name: Create One Product Correctly
+    request:
+      url: http://localhost:5000/v1/products
+      method: POST
+      json:
+        id: 44
+        title: "One product title here YO"
+        price: 1.22
+      headers:
+        content-type: application/json
+    response:
+      status_code: 200
+      body:
+        id: 44
+        title: "One product title here YO"
+        price: 1.22
+
+  - name: Create The Same Product Correctly
+    request:
+      url: http://localhost:5000/v1/products
+      method: POST
+      json:
+        id: 44
+        title: "One product title here YO"
+        price: 1.22
+      headers:
+        content-type: application/json
+    response:
+      status_code: 422
+      body:
+        message: "Cannot create a new Product"
+        reason: "Product already exists"
+
+  - name: Read New Product
+    request:
+      url: http://localhost:5000/v1/products/44
       method: GET
       headers:
         content-type: application/json
     response:
       status_code: 200
-      # json:
-      #   id: 1
-      #   title: "One product title here tetetetet"
-      #   price: 5.15
+      body:
+        id: 44
+        title: "One product title here YO"
+        price: 1.22
+
+  - name: Update Entire Product
+    request:
+      url: http://localhost:5000/v1/products/44
+      method: PUT
+      json:
+        id: 44
+        title: "This title was updated HAHA"
+        price: 10.86
+      headers:
+        content-type: application/json
+    response:
+      status_code: 200
+      body:
+        id: 44
+        title: "This title was updated HAHA"
+        price: 10.86
+
+  - name: Patch Product Title
+    request:
+      url: http://localhost:5000/v1/products/44
+      method: PATCH
+      json:
+        title: "This is a patch test YOLO"
+      headers:
+        content-type: application/json
+    response:
+      status_code: 200
+      body:
+        id: 44
+        title: "This is a patch test YOLO"
+        price: 10.86
+
+  - name: DELETE New Product
+    request:
+      url: http://localhost:5000/v1/products/44
+      method: DELETE
+      headers:
+        content-type: application/json
+    response:
+      status_code: 200

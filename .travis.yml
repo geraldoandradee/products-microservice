@@ -1,0 +1,23 @@
+language: python
+
+python:
+  - "2.7"
+  - "3.3"
+  - "3.4"
+  - "3.5"
+  - "3.6"
+  - "3.7-dev"
+  - "pypy3.5"
+
+env:
+  - SECRET_KEY=m9rOHQCtrsuhppNu4oez8woU
+  - JWT_AUTH_URL_RULE=/v1/auth
+
+install:
+  - pip install -r requirements/dev.txt
+
+before_script:
+  - flask run
+
+script:
+  - py.test -v

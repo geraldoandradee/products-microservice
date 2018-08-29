@@ -1,3 +1,5 @@
+#! -*- coding: utf-8 -*-
+from __future__ import absolute_import
 import os
 from flask import Flask
 from flask_restful import Api
@@ -27,7 +29,4 @@ api = Api(app, prefix="/v1")
 
 # jwt = JWT(app, verify, identity)
 
-api.add_resource(ProductHandler, '/product', '/product/<int:id>')
-
-# if __name__ == '__main__':
-#     app.run(debug=True)
+api.add_resource(ProductHandler, '/products', '/products/<int:id>')

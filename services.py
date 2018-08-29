@@ -7,9 +7,9 @@ from validators import ProductValidator
 
 class ProductService(object):
 
-    def _validate(self, payload):
+    def _validate(self, payload, is_a_patch=False):
         validator = ProductValidator(payload)
-        validator.validate()
+        validator.validate(is_a_patch)
 
     def create(self, payload):
         self._validate(payload)
@@ -18,12 +18,14 @@ class ProductService(object):
             item = self.read(payload['id'])
             if item:
                 raise ProductAlreadyExistsException("Product already exists")
+        else:
+            raise PreconditionFailException("You must provide an ID")
 
         product = Product()
         product.__dict__.update(payload)
         db.save(payload)
 
-        return self.read(id)
+        return self.read(payload['id'])
 
     def read(self, id, klass_reference=None):
         return db.get(id, klass_reference)
@@ -46,7 +48,7 @@ class ProductService(object):
             del payload['id']
 
         product.__dict__.update(payload)
-        self._validate(payload)
+        self._validate(payload=payload, is_a_patch=True)
         db.save(product)
 
         return self.read(id)
