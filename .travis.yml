@@ -19,7 +19,7 @@ install:
   - pip install -r requirements/dev.txt
 
 before_script:
-  - nohup flask run&
+  - flask run &
 
 script:
-  - py.test -v
+  - sleep 2 && py.test -v
