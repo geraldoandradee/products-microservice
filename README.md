@@ -1,4 +1,4 @@
-# Products Microservice Documentation
+# Products Microservice Documentation [![Build Status](https://travis-ci.org/geraldoandradee/products-microservice.svg?branch=master)](https://travis-ci.org/geraldoandradee/products-microservice)
 
 This project is a POC. Not production ready.
 
@@ -8,19 +8,12 @@ This project is a POC. Not production ready.
 To run the tests:
     
     $ pip install -r requirements/dev.txt
-    $ unit2 discover
+    $ flask run
+    $ py.test -v
 
 
 # Installing 
 
-It's simple:
-    
-    $ pip install ga-storage-manager
-
 
 
 # How it works
-
-In order make `ga_storage_manager` works you must define at least some env vars:
-
-* STORAGE_MANAGER_ENGINE (required): Defines storage manager's engine. `FILESYSTEM` is the only mode supported.
