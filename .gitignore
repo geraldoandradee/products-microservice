@@ -105,3 +105,4 @@ venv.bak/
 .idea
 db.json
 nohup.out
+.pytest_cache

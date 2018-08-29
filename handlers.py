@@ -1,10 +1,10 @@
-#! -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 from __future__ import absolute_import
 from flask import request
 from flask_restful import Resource
 import logging
 
-# from flask_jwt import jwt_required
+from flask_jwt import jwt_required
 from .exceptions import PreconditionFailException, ProductAlreadyExistsException, InvalidFieldException
 from .services import ProductService
 
@@ -19,7 +19,7 @@ class ProductHandler(Resource):
     def _error_message(message, reason, status_code):
         return {"message": message, "reason": reason}, status_code
 
-    # @jwt_required()
+    @jwt_required()
     def get(self, id=None):
         if id is None:
             return self.service.list()
@@ -29,6 +29,7 @@ class ProductHandler(Resource):
                 return {}, 404
             return item
 
+    @jwt_required()
     def post(self):
         data = request.get_json()
         try:
@@ -47,6 +48,7 @@ class ProductHandler(Resource):
             logging.error("Cannot create a new Product %s" % e)
             return {"message": "Cannot create a new Product", "reason": "Unknonw reason." % e}, 400
 
+    @jwt_required()
     def put(self, id):
         data = request.get_json()
         try:
@@ -56,6 +58,7 @@ class ProductHandler(Resource):
             logging.error("Cannot create a new Product %s" % e)
             return {"message": "Cannot create a new Product"}, 400
 
+    @jwt_required()
     def patch(self, id):
         data = request.get_json()
         try:
@@ -65,6 +68,7 @@ class ProductHandler(Resource):
             logging.error("Cannot create a new Product %s" % e)
             return {"message": "Cannot patch a Product"}, 400
 
+    @jwt_required()
     def delete(self, id=None):
         try:
             self.service.delete(id)

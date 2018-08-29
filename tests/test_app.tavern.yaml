@@ -1,6 +1,21 @@
 test_name: Test CRUD Product
 
 stages:
+  - name: Get Token
+    request:
+      url: http://localhost:5000/v1/auth
+      method: POST
+      json:
+        username: "geraldo@geraldoandrade.com"
+        password: "123456"
+      headers:
+        content-type: application/json
+    response:
+      status_code: 200
+      save:
+        body:
+          access_token: access_token
+
   - name: Create One Product Incorrecly (Missing id)
     request:
       url: http://localhost:5000/v1/products
@@ -10,6 +25,7 @@ stages:
         price: 1.22
       headers:
         content-type: application/json
+        Authorization: "JWT {access_token}"
     response:
       status_code: 422
       body:
@@ -25,6 +41,7 @@ stages:
         price: 1.22
       headers:
         content-type: application/json
+        Authorization: "JWT {access_token}"
     response:
       status_code: 422
       body:
@@ -40,6 +57,7 @@ stages:
         title: "One product title here YO"
       headers:
         content-type: application/json
+        Authorization: "JWT {access_token}"
     response:
       status_code: 422
       body:
@@ -56,6 +74,7 @@ stages:
         price: 1.22
       headers:
         content-type: application/json
+        Authorization: "JWT {access_token}"
     response:
       status_code: 200
       body:
@@ -73,6 +92,7 @@ stages:
         price: 1.22
       headers:
         content-type: application/json
+        Authorization: "JWT {access_token}"
     response:
       status_code: 422
       body:
@@ -85,6 +105,7 @@ stages:
       method: GET
       headers:
         content-type: application/json
+        Authorization: "JWT {access_token}"
     response:
       status_code: 200
       body:
@@ -102,6 +123,7 @@ stages:
         price: 10.86
       headers:
         content-type: application/json
+        Authorization: "JWT {access_token}"
     response:
       status_code: 200
       body:
@@ -117,6 +139,7 @@ stages:
         title: "This is a patch test YOLO"
       headers:
         content-type: application/json
+        Authorization: "JWT {access_token}"
     response:
       status_code: 200
       body:
@@ -130,5 +153,6 @@ stages:
       method: DELETE
       headers:
         content-type: application/json
+        Authorization: "JWT {access_token}"
     response:
       status_code: 200
