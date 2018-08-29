@@ -5,8 +5,8 @@ from flask_restful import Resource
 import logging
 
 # from flask_jwt import jwt_required
-from exceptions import PreconditionFailException, ProductAlreadyExistsException, InvalidFieldException
-from services import ProductService
+from .exceptions import PreconditionFailException, ProductAlreadyExistsException, InvalidFieldException
+from .services import ProductService
 
 
 class ProductHandler(Resource):

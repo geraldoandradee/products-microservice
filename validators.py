@@ -1,6 +1,6 @@
 #! -*- coding: utf-8 -*-
 import logging
-from exceptions import InvalidFieldException
+from .exceptions import InvalidFieldException
 
 
 class ProductValidator(object):

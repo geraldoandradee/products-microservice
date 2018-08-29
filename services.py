@@ -1,8 +1,8 @@
 #! -*- coding: utf-8 -*-
-from exceptions import PreconditionFailException, ProductAlreadyExistsException, ItemNotFoundException
-from models import Product
-from repository import db
-from validators import ProductValidator
+from .exceptions import PreconditionFailException, ProductAlreadyExistsException, ItemNotFoundException
+from .models import Product
+from .repository import db
+from .validators import ProductValidator
 
 
 class ProductService(object):
