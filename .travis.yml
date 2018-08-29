@@ -10,8 +10,10 @@ python:
   - "pypy3.5"
 
 env:
-  - SECRET_KEY=m9rOHQCtrsuhppNu4oez8woU
-  - JWT_AUTH_URL_RULE=/v1/auth
+  global:
+    - SECRET_KEY=m9rOHQCtrsuhppNu4oez8woU
+    - JWT_AUTH_URL_RULE=/v1/auth
+    - FLASK_APP=app.py
 
 install:
   - pip install -r requirements/dev.txt
