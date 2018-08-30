@@ -16,6 +16,7 @@ This project has only functional tests implemented.
 
 # How to run
 
+    $ cp .env.example .env
     $ docker-compose up --build
     
 After you have to get token from /v1/auth
